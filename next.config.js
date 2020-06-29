@@ -1,5 +1,4 @@
 /* eslint-disable */
-
 // Ref: https://github.com/cyrilwanner/next-compose-plugins
 // Ref: https://nextjs.org/docs/api-reference/next.config.js/static-optimization-indicator
 
@@ -10,9 +9,6 @@ const nextConfig = {
   // Memo: take out pretender indicator when running `yarn dev`
   devIndicators: {
     autoPrerender: false,
-  },
-  env: {
-    REACT_APP_YELP_API_KEY: "Your Yelp Fushion API Key",
   },
 };
 
@@ -26,6 +22,12 @@ module.exports = withPlugins(
         },
       },
     ],
+    // [
+    //   withTM,
+    //   {
+    //     transpileModules: ["gsap", "aos"],
+    //   },
+    // ],
   ],
   nextConfig
 );
