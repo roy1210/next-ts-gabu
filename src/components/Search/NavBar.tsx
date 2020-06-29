@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "AT/assets/logo.png";
+import logo from "../../assets/logo.png";
 import Link from "next/link";
 import SearchBar from "../Common/SearchBar";
 import styled from "styled-components";
