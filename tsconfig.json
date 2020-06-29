@@ -17,11 +17,9 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@/assets/*": ["src/assets/*"]
-      }
+    "baseUrl": ".",
+    "paths": {
+      "@/assets/*": ["src/assets/*"]
     }
   },
   "exclude": [
