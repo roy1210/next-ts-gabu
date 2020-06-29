@@ -1,7 +1,7 @@
 import React from "react";
-import { RawBusinessesObject, Category } from "src/types/types";
 import styled from "styled-components";
 import BusinessRating from "../Common/BusinessRating";
+import { RawBusinessesObject, Category } from "../../types/types";
 
 interface Props {
   business: RawBusinessesObject | null;

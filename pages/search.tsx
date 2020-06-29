@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import { useLocation } from "react-use";
 import { useBusinessSearch } from "../src/hocks/yelp-api/useBusinessSearch";
 import NavBar from "../src/components/Search/NavBar";
-import SubNav from "src/components/Search/SubNav";
-import SearchResultSummary from "src/components/Search/SearchResultSummary";
-import SearchResults from "src/components/Search/SearchResults";
+import SubNav from "../src/components/Search/SubNav";
+import SearchResultSummary from "../src/components/Search/SearchResultSummary";
+import SearchResults from "../src/components/Search/SearchResults";
 
 const Search = (): JSX.Element => {
   const router = useRouter();

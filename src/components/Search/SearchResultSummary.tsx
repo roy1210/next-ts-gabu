@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchResultSummaryContainer } from "src/styles/SearchResultSummary.styles";
+import { SearchResultSummaryContainer } from "../../styles/SearchResultSummary.styles";
 
 interface Props {
   term: string | null;
