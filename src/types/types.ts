@@ -1,3 +1,20 @@
+/* eslint-disable */
+
+export interface RawSearchObject {
+  businesses: RawBusinessesObjects;
+  total: number;
+  region: Region;
+}
+
+export interface Region {
+  center: Center;
+}
+
+export interface Center {
+  latitude: number;
+  longitude: number;
+}
+
 export interface RawBusinessesObject {
   id: string;
   alias: string;

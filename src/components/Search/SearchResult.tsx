@@ -13,11 +13,9 @@ const SearchResult = (props: Props): JSX.Element => {
     return <div />;
   }
   const tags = business.categories.map((category: Category) => (
-    <>
-      <span className="tag" key={business.id + category.title}>
-        {category.title}
-      </span>{" "}
-    </>
+    <span className="tag" key={business.id + category.title}>
+      {category.title}
+    </span>
   ));
 
   const addressLines = business.location.display_address.map(
@@ -78,5 +76,8 @@ const SearchResultContainer = styled.div`
   }
   .contact-info p {
     font-size: 0.85rem;
+  }
+  .tag {
+    margin-right: 0.5rem;
   }
 `;

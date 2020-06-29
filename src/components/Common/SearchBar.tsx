@@ -57,7 +57,7 @@ const SearchBar = (props: Props): JSX.Element => {
             className={`button ${sizeClass} search-button`}
             onClick={(e: MouseEvent): void => submit(e)}
           >
-            <span className={`icon is-small search-icon`}>
+            <span className="icon is-small search-icon">
               <i className="fas fa-search" />
             </span>
           </div>
