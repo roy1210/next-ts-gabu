@@ -27,9 +27,9 @@ const Search = (): JSX.Element => {
     performSearch({ term, location });
   };
 
-  if (!term || !locationParam) {
-    router.push("/");
-  }
+  // if (!term || !locationParam) {
+  // router.push("/");
+  // }
 
   return (
     <>

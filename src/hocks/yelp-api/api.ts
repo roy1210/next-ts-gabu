@@ -5,6 +5,7 @@ export const get = (path: string, queryParams: object) => {
   const query = queryString.stringify(queryParams);
   // @ts-ignore
   return fetch(`${API_BASE_URL}${path}?${query}`, {
+    // @ts-ignore
     headers: {
       Authorization: `Bearer ${BEARER_TOKEN}`,
       Origin: "localhost",
