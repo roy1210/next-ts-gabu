@@ -1,7 +1,5 @@
+import { useEffect, useState } from "react";
 import { RawBusinessesObjects, RawSearchObject } from "../../types/types";
-import { useState, useEffect } from "react";
-import * as api from "./api";
-import { BEARER_TOKEN } from "./config";
 import yelp from "./yelp";
 
 export const useBusinessSearch = (
@@ -29,7 +27,6 @@ export const useBusinessSearch = (
     setBusinesses([]);
     const fetchData = async (): Promise<void> => {
       try {
-        console.log(BEARER_TOKEN);
         const response = await yelp.get("/businesses/search", {
           params: searchParams,
         });

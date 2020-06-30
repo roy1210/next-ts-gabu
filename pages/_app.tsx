@@ -1,49 +1,30 @@
 /* --------------------------------- Import --------------------------------- */
 import React from "react";
 import { AppProps } from "next/app";
+import { createWrapper } from "next-redux-wrapper";
+import { Provider } from "react-redux";
+import configureStore from "../src/store";
 import Layout from "../src/components/Layout";
-
 /* ---------------------------- Animation library --------------------------- */
 
 /* ----------------------------------- CSS ---------------------------------- */
 import "bulma/css/bulma.css";
 /* ------------------------------- End import ------------------------------- */
 
-const App = ({ Component, pageProps }: AppProps): JSX.Element => {
-  // **
-  //  * Ref: https://github.com/natemoo-re/next.js/blob/example-framer-motion/examples/with-framer-motion/pages/_app.js
-  //  *
-  //  * Handle scrolling gracefully, since next/router scrolls to top
-  //  * before exit animation is complete.
-  //  *
-  //  * Note that next/link components should also be using `scroll={false}`
-  //  **/
-  // const handleExitComplete = (): void => {
-  //   if (typeof window !== "undefined") {
-  //     window.scrollTo({
-  //       top: 0,
-  //     });
-  //   }
-  // };
+const store = configureStore();
+const makestore = () => store;
+const wrapper = createWrapper(makestore);
 
+const App = ({ Component, pageProps }: AppProps): JSX.Element => {
   return (
     <>
-      <Layout>
-        {/* <AnimatePresence exitBeforeEnter onExitComplete={handleExitComplete}>
-            <motion.div
-              key={router.pathname}
-              initial="initial"
-              animate="in"
-              exit="out"
-              variants={PageVariants}
-              transition={PageTransition}
-            > */}
-        <Component {...pageProps} />
-        {/* </motion.div>
-          </AnimatePresence> */}
-      </Layout>
+      <Provider store={store}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </Provider>
     </>
   );
 };
 
-export default App;
+export default wrapper.withRedux(App);
