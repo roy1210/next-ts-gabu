@@ -6,30 +6,45 @@ import SearchResults from "../src/components/Search/SearchResults";
 import SearchResultSummary from "../src/components/Search/SearchResultSummary";
 import SubNav from "../src/components/Search/SubNav";
 import { useBusinessSearch } from "../src/hocks/yelp-api/useBusinessSearch";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchBusinessRestaurantsAsync } from "../src/state/yelp/actions";
 
 const Search = (): JSX.Element => {
   const router = useRouter();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
+  console.log("location", location);
+
   const term = params.get("find_desc");
   const locationParam = params.get("find_loc");
-  const [
-    businesses,
-    amountResults,
-    searchParams,
-    performSearch,
-  ] = useBusinessSearch(term, locationParam);
+
+  const yelp = useSelector((state) => state.yelp);
+  const { restaurants, total } = yelp;
+  const dispatch = useDispatch();
 
   const search = (term: string, location: string): void => {
+    dispatch(
+      fetchBusinessRestaurantsAsync.request({
+        term,
+        location,
+      })
+    );
     const encodedTerm = encodeURI(term);
     const encodedLocation = encodeURI(location);
     router.push(`/search?find_desc=${encodedTerm}&find_loc=${encodedLocation}`);
-    performSearch({ term, location });
   };
 
   useEffect(() => {
     if (!term || !locationParam) {
       router.push("/");
+    }
+    if (restaurants === null) {
+      dispatch(
+        fetchBusinessRestaurantsAsync.request({
+          term: term,
+          location: locationParam,
+        })
+      );
     }
   }, []);
 
@@ -38,12 +53,12 @@ const Search = (): JSX.Element => {
       <NavBar term={term} location={locationParam} search={search} />
       <SubNav />
       <SearchResultSummary
-        term={searchParams.term}
-        location={searchParams.location}
-        amountResults={amountResults}
-        shownResults={businesses ? businesses.length : 0}
+        term={decodeURI(term)}
+        location={decodeURI(locationParam)}
+        amountResults={total}
+        shownResults={restaurants ? restaurants.length : 0}
       />
-      <SearchResults businesses={businesses} />
+      <SearchResults businesses={restaurants} />
     </>
   );
 };

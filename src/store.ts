@@ -1,8 +1,9 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, compose, createStore, Store } from "redux";
 import { createLogger, LogEntryObject } from "redux-logger";
-import createSagaMiddleware from "redux-saga";
-import { rootReducer } from "./state/configureStore";
+import createSagaMiddleware, { runSaga, Task } from "redux-saga";
+import { rootReducer, rootSaga } from "./state/configureStore";
 import { composeWithDevTools } from "redux-devtools-extension";
+import { createWrapper } from "next-redux-wrapper";
 
 // declare global {
 //   interface Window {
@@ -12,6 +13,11 @@ import { composeWithDevTools } from "redux-devtools-extension";
 // window.__REDUX_DEVTOOLS_EXTENSION__ = window.__REDUX_DEVTOOLS_EXTENSION__ || {};
 
 // export default function configureStore(initialState: any): any {
+
+export interface SagaStore extends Store {
+  sagaTask?: Task;
+}
+
 export default function configureStore(): any {
   const sagaMiddleware = createSagaMiddleware();
   const middlewares = [sagaMiddleware];
@@ -36,5 +42,9 @@ export default function configureStore(): any {
   );
 
   const store = createStore(rootReducer, composeWithDevTools(composeEnhancers));
+
+  (store as SagaStore).sagaTask = sagaMiddleware.run(rootSaga);
   return store;
 }
+
+// export const wrapper = createWrapper<State>(makeStore, { debug: true });

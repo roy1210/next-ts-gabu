@@ -9,13 +9,15 @@ import Layout from "../src/components/Layout";
 
 /* ----------------------------------- CSS ---------------------------------- */
 import "bulma/css/bulma.css";
+import { rootSaga } from "../src/state/configureStore";
 /* ------------------------------- End import ------------------------------- */
 
 const store = configureStore();
-const makestore = () => store;
-const wrapper = createWrapper(makestore);
+const makeStore = () => store;
+const wrapper = createWrapper(makeStore);
 
 const App = ({ Component, pageProps }: AppProps): JSX.Element => {
+  // store.runSaga(rootSaga);
   return (
     <>
       <Provider store={store}>

@@ -1,20 +1,24 @@
-import React from "react";
-import styled from "styled-components";
 import { useRouter } from "next/dist/client/router";
+import React from "react";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import logo from "../src/assets/logo.png";
-import TopNav from "../src/components/Home/TopNav";
 import SearchBar from "../src/components/Common/SearchBar";
 import SearchSuggestions from "../src/components/Home/SearchSuggestions";
-import { useSelector, useDispatch } from "react-redux";
-import { goNextStep } from "../src/state/yelp/actions";
+import TopNav from "../src/components/Home/TopNav";
+import { fetchBusinessRestaurantsAsync } from "../src/state/yelp/actions";
 
 const Home = (): JSX.Element => {
   const router = useRouter();
-  const yelp = useSelector((state) => state.yelp);
-  const { page } = yelp;
   const dispatch = useDispatch();
 
   const search = (term: string, location: string): void => {
+    dispatch(
+      fetchBusinessRestaurantsAsync.request({
+        term,
+        location,
+      })
+    );
     // Memo: Take care space issue for URL (like: San francisco)
     const urlEncodedTerm = encodeURI(term);
     const urlEncodedLocation = encodeURI(location);
@@ -34,7 +38,7 @@ const Home = (): JSX.Element => {
           <SearchSuggestions />
         </div>
       </div>
-      <div className="state-test">
+      {/* <div className="state-test">
         <h1>{page}</h1>
         <button
           onClick={() => {
@@ -43,7 +47,14 @@ const Home = (): JSX.Element => {
         >
           Action
         </button>
-      </div>
+        <button
+          onClick={() => {
+            dispatch(goToNextPage(1));
+          }}
+        >
+          Action+1
+        </button>
+      </div> */}
     </HomeContainer>
   );
 };

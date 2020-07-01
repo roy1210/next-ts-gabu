@@ -34,6 +34,10 @@ export interface RawBusinessesObject {
   distance: number;
 }
 
+export interface SearchParams {
+  term: string;
+  location: string;
+}
 export type RawBusinessesObjects = RawBusinessesObject[];
 
 export interface Category {
