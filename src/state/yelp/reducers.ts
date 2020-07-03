@@ -13,10 +13,7 @@ export const yelpInitialState: YelpState = {
 
 export type YelpAction = ActionType<typeof actions>;
 
-export const yelpReducer = (
-  state = yelpInitialState,
-  action: YelpAction
-): YelpState => {
+export const yelpReducer = (state = yelpInitialState, action): YelpState => {
   switch (action.type) {
     case GO_NEXT_STEP: {
       return { ...state, page: state.page + 5 };

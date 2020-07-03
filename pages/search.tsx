@@ -8,6 +8,7 @@ import SubNav from "../src/components/Search/SubNav";
 import { useBusinessSearch } from "../src/hocks/yelp-api/useBusinessSearch";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchBusinessRestaurantsAsync } from "../src/state/yelp/actions";
+import { ApplicationState } from "../src/state/types";
 
 const Search = (): JSX.Element => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const Search = (): JSX.Element => {
   const term = params.get("find_desc");
   const locationParam = params.get("find_loc");
 
-  const yelp = useSelector((state) => state.yelp);
+  const yelp = useSelector((state: ApplicationState) => state.yelp);
   const { restaurants, total } = yelp;
   const dispatch = useDispatch();
 
